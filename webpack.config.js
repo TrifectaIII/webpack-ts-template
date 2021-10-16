@@ -8,7 +8,7 @@ module.exports = {
     entry: path.resolve(__dirname, './src/index.ts'),
 
     devServer: {
-        contentBase: path.join(__dirname, 'public'),
+        static: path.join(__dirname, 'docs'),
         compress: true,
         port: 8000,
     },
@@ -35,6 +35,6 @@ module.exports = {
 
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, './build'),
+        path: path.resolve(__dirname, './docs'),
     },
 };
