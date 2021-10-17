@@ -1,4 +1,5 @@
 const path = require('path');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     // mode: 'development',
@@ -7,6 +8,7 @@ module.exports = {
     devtool: false,
     entry: path.resolve(__dirname, './src/index.ts'),
 
+    // settings for dev server (npm start)
     devServer: {
         static: path.join(__dirname, 'docs'),
         compress: true,
@@ -21,7 +23,7 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
-            //sass rule
+            //css rule
             {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"],
@@ -33,8 +35,16 @@ module.exports = {
         extensions: [ '.tsx', '.ts', '.js' ],
     },
 
+    //will build html from src file, injecting script tag automatically.
+    plugins: [
+        new HTMLWebpackPlugin({
+            template: 'src/index.html',
+        }),
+    ],
+
+    // filename of output js, and path for all build files
     output: {
-        filename: 'bundle.js',
+        filename: '[id].bundle.js',
         path: path.resolve(__dirname, './docs'),
     },
 };
